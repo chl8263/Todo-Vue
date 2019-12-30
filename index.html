@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+</head>
+
+<body>
+
+    <div id="app">
+        <ul>
+            <template v-for = "item in items">
+                <li>
+                    <img :src = "item.image">
+                    <br/>
+                    {{item.title}}
+                </li>    
+            </template>
+            
+        </ul>
+
+    </div>
+
+    <!-- lib -->
+    <script src="lib/vue.min.js"></script>
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    items: [
+                        {
+                            id: 1,
+                            image: 'http://picsum.photo/210/118/?image=1',
+                            title : "computer"
+                        },
+                        {
+                            id: 2,
+                            image: 'http://picsum.photo/210/118/?image=100',
+                            title : "computer2"
+                        },
+                        {
+                            id: 3,
+                            image: 'http://picsum.photo/210/118/?image=160',
+                            title : "computer3"
+                        },
+                        {
+                            id: 4,
+                            image: 'http://picsum.photo/210/118/?image=200',
+                            title : "computer4"
+                        },
+                        {
+                            id: 5,
+                            image: 'http://picsum.photo/210/118/?image=240',
+                            title : "computer5"
+                        },
+                        {
+                            id: 6,
+                            image: 'http://picsum.photo/210/118/?image=250',
+                            title : "computer6"
+                        },
+
+                    ]
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
