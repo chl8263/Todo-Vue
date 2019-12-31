@@ -13,24 +13,37 @@
 
 <body>
     <div id="root">
-       <div>{{word}}</div>
-       <form v-on:submit="onSubmitForm">
-           <input type="text" ref="answer" v-model="value">
-           <button type="submit">enter</button>
-       </form>
-       <div>{{result}}</div>
+        <!-- <div>{{word}}</div>
+        <form v-on:submit="onSubmitForm">
+            <input type="text" ref="answer" v-model="value">
+            <button type="submit">enter</button>
+        </form>
+        <div>{{result}}</div> -->
+       <word-relay></word-relay>
+       <word-relay></word-relay>
+       <word-relay></word-relay>
     </div>
 </body>
-
 <script>
-    const app = new Vue({
-        el: "#root",
-        data:{
-            word: "Ewan",
-            result: '',
-            value: ''
+    Vue.component('word-relay',{
+        template: `
+            <div>
+                <div>{{word}}</div>
+                    <form v-on:submit="onSubmitForm">
+                        <input type="text" ref="answer" v-model="value">
+                        <button type="submit">enter</button>
+                    </form>
+                <div>{{result}}</div>
+            </div>
+        `,
+        data() {
+            return {
+                word: "Ewan",
+                result: '',
+                value: ''
+            }
         },
-        methods: {
+        methods:{
             onSubmitForm(e){
                 e.preventDefault();
                 if(this.word[this.word.length -1] === this.value[0]){
@@ -43,6 +56,29 @@
                 this.$ref.answer.focus();
             }
         }
+    });
+</script>
+<script>
+    const app = new Vue({
+        el: "#root",
+        // data:{
+        //     word: "Ewan",
+        //     result: '',
+        //     value: ''
+        // },
+        // methods: {
+        //     onSubmitForm(e){
+        //         e.preventDefault();
+        //         if(this.word[this.word.length -1] === this.value[0]){
+        //             this.result = "correct!";
+        //             this.word = this.value;
+        //             this.value = "";
+        //         }else {
+        //             this.result = "Wrong!";
+        //         }
+        //         this.$ref.answer.focus();
+        //     }
+        // }
     });
 </script>
 
