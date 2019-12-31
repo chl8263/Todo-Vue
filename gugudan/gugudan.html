@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gugudan</title>
+</head>
+
+<!-- lib -->
+<script src="../lib/vue.min.js"></script>
+
+<body>
+    <div id="root">
+        <div>{{first}} multiful {{second}} ??</div>
+        <form v-on:submit="onSubmitForm">
+            <input type="number" ref="answer" v-model="value">
+            <button type="submit">enter</button>
+        </form>
+        <div>{{result}}</div>
+    </div>
+</body>
+
+<script>
+    const app = new Vue({
+        el: "#root",
+        data: {
+            first: Math.ceil(Math.random() * 9),
+            second: Math.ceil(Math.random() * 9),
+            value: '',
+            result: ''
+        },
+        methods: {
+            onSubmitForm(e) {
+                e.preventDefault(); //prevent refresh
+                if (this.first * this.second === parseInt(this.value)) {
+                    this.result = 'correct!';
+                    this.value = "";
+                    this.first = Math.ceil(Math.random() * 9);
+                    this.second = Math.ceil(Math.random() * 9);
+                    this.$ref.answer.forcus();
+                } else {
+                    this.result = "wrong";
+                }
+            }
+        }
+    });
+</script>
+
+</html>
