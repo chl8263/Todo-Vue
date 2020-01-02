@@ -1,4 +1,4 @@
 import Vue from 'vue';  //get pakage from pakage.json
-import NumberBaseball from './numberBaseball';
+import reactionVelocity from './reactionVelocity';
 
-new Vue(NumberBaseball).$mount("#root");
+new Vue(reactionVelocity).$mount("#root");

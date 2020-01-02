@@ -1,62 +1,72 @@
 <template>
     <div>
-        <h1> {{result}} </h1>
-        <form @submit.prevent="onSubmitForm">
-            <input type="number" ref="answer" minlength="4" maxlength="4" v-model="value"/>
-            <button type="submit">Enter</button>
-        </form>
-        <div>count : {{tries.length}}</div>
-        <div>status : {{result}}</div>
-        <ul>
-            <li v-for="t in tries">
-                <div>{{t.try}}</div>
-                <div>{{t.result}}</div>
-            </li>
-        </ul>
+        <div id="screen" :class="state" @click="onClickScreen">{{message}} ms</div>
+        <template v-if="result.length">
+            <div> average time: {{average}} </div>
+            <button @click="onReset">Reset</button>
+        </template>
     </div>
 </template>
-
+ 
 <script>
-    const getNumber = (count) => {
-        const arr = [];
-        for(let i = 0 ; i < count; i++){
-            arr.push(Math.ceil(Math.random() * 9));
-        }
-        return arr;
-    }
-    
+    let startTime = 0;
+    let endTime = 0;
+    let timeOut = null;
     export default {
         data(){
             return{
-                answer: getNumber(4),
-                tries: [],
-                value: '',
-                result: ''
+               result: [],
+               state: 'waiting',
+               message: 'Click to Start'
+            }
+        },
+        computed: {
+            average(){
+                return this.result.reduce((a,c) => a+c ,0) / this.result.length || 0
             }
         },
         methods:{
-            onSubmitForm(e){
-                //e.preventDefault();
-                if(this.value === this.answer.join('')){
-                    this.tries.push({
-                        try: this.value,
-                        result: 'Homerun'
-                    });
-                    this.result = "Homerun!";
-                    this.value = "";
-                    this.count = "";
-                    this.$refs.answer.focus();
-                }else {
-                    const strike = 0;
-                    const ball = 0;
-                    const answerArr = this.value.split('').map((v) => parseInt(v));
-                    
-                }
-            }
+          onReset(){
+            this.result = [];
+          },
+          onClickScreen(){
+              if(this.state === "waiting"){
+                this.state = "ready";
+                this.message = "Click if color greeen"
+                timeOut = setTimeout(() => {
+                    this.state = "now";
+                    this.message = "click";
+                    startTime = new Date();
+                }, Math.floor(Math.random()* 1000) + 2000);
+              }else if(this.state === "ready"){
+                clearTimeout(timeOut);
+                this.state = "waiting";
+                this.message = "Not now...."
+              }else if(this.state === "now"){
+                endTime = new Date();
+                this.state = "waiting";
+                this.message = "Click to start"
+                this.result.push(endTime - startTime);
+              }
+          }
         }
     };
 </script>
 
-<style>
-
+<style scoped>
+    #screen {
+        width: 300px;
+        height: 200px;
+        text-align: center;
+        user-select: none;
+    }
+    #screen.waiting {
+        background-color: aqua;
+    }
+    #screen.ready {
+        background-color: red;
+    }
+    #screen.now {
+        background-color: greenyellow;
+    }
 </style>
