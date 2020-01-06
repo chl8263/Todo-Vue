@@ -8,6 +8,8 @@
         </div>
         <div>{{result}}</div>
         <div>Present score {{score || 0}}</div>
+
+        
     </div>
 </template>
  
@@ -17,6 +19,7 @@
         scissors: -'-142px',
         paper: '-284px'
     };
+    let interval = 0;
     export default {
         data(){
            return {
@@ -33,12 +36,36 @@
                 }
                 
             }
-           
         },
         methods:{
           onclickButton(choice){
 
           }
+        },
+        created(){
+            console.log("created");
+        },
+        mounted(){
+            console.log("mounted"); 
+            interval = setInterval(() => {
+                if(this.imgcode === resCoords.rock){
+                    this.resCoords = resCoords.scissors;
+                }else if(this.imgcode === resCoords.scissors){
+                    this.resCoords = resCoords.paper;
+                }else if(this.imgcode === resCoords.paper){
+                    this.resCoords = resCoords.rock;
+                }
+            }, 100);
+        },
+        updated(){
+            console.log("updated"); 
+        },
+        beforeDestroy(){
+            console.log("beforeDestroy");
+            clearInterval(interval);
+        },
+        destroyed(){
+            console.log("destroyed"); 
         }
     };
 </script>
