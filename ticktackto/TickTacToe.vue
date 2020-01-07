@@ -1,9 +1,13 @@
 <template>    
-    <table-component :table-data="tableData"/>
+    <div>
+        <table-component :table-data="tableData"/>
+        <div>Now {{turn}}</div>
+    </div>
 </template>
  
 <script>
     import tableComponent from './TableComponent';
+    import EventBus from './EventBus';
   
     export default {
         components: {
@@ -22,9 +26,13 @@
         computed: {
         },
         methods:{
-            
+            onClickTd(){
+                console.log('clickTd!');
+            }
         },
-
+        created(){
+            EventBus.$on('clickTd', this.onClickTd);
+        },
         mounted(){
         },
         beforeDestroyed(){

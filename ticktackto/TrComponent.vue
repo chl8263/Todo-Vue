@@ -15,6 +15,11 @@
         components: {
             'td-component': tdComponent
         },
+        data(){
+            return {
+                parent: "trtrtrtrt"
+            }
+        },
         mounted(){
         }
     }   
