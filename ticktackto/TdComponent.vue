@@ -8,6 +8,11 @@
             cellData: String,
             rowIndex: Number,
             cellIndex: Number
+        },
+        methods: {
+            onClickTd(){
+                console.log(this.$root.$data);
+            }
         }
     }
 </script>

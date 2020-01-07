@@ -1,4 +1,4 @@
 import Vue from 'vue';  //get pakage from pakage.json
-import lottoGenerator from './lottoGenerator';
+import TickTacToe from './TickTacToe';
 
-new Vue(lottoGenerator).$mount("#root");
+new Vue(TickTacToe).$mount("#root");

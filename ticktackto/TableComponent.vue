@@ -1,6 +1,6 @@
 <template>
     <table>
-        <tr-component :key="" v-for="(_, index) in tableData" :row-data="rowData" :row-index="index" ></tr-component>
+        <tr-component :key="index" v-for="(_, index) in tableData" :row-data="_" :row-index="index"/>
     </table>
 </template>
 
@@ -11,8 +11,11 @@
         props: {
             tableData: Array
         },
-        component: {
+        components: {
             'tr-component': trComponent
-        }   
+        },
+        mounted(){
+        }
     }
 </script>
+
