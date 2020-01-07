@@ -19,6 +19,11 @@
         scissors: -'-142px',
         paper: '-284px'
     };
+    const scores = {
+        rock : 1,
+        scissors : 0,
+        paper : -1
+    };
     let interval = 0;
     export default {
         data(){
@@ -39,7 +44,8 @@
         },
         methods:{
           onclickButton(choice){
-
+            clearInterval(interval);
+            //const myScore = 
           }
         },
         created(){
@@ -48,12 +54,12 @@
         mounted(){
             console.log("mounted"); 
             interval = setInterval(() => {
-                if(this.imgcode === resCoords.rock){
-                    this.resCoords = resCoords.scissors;
-                }else if(this.imgcode === resCoords.scissors){
-                    this.resCoords = resCoords.paper;
-                }else if(this.imgcode === resCoords.paper){
-                    this.resCoords = resCoords.rock;
+                if(this.imgcode === rspCoords.rock){
+                    this.rspCoords = rspCoords.scissors;
+                }else if(this.imgcode === rspCoords.scissors){
+                    this.rspCoords = rspCoords.paper;
+                }else if(this.imgcode === rspCoords.paper){
+                    this.rspCoords = rspCoords.rock;
                 }
             }, 100);
         },
